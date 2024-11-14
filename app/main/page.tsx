@@ -5,6 +5,9 @@ import { useAppDispatch, useAppSelector } from '../hooks/useAppDispatch';
 import { fetchUser } from '@/store/reducer/userSlice';
 import { fetchPosts, addPost } from '@/store/reducer/postsSlice';
 import { useRouter } from 'next/navigation';
+import IconStore from '@/components/Icons/icons';
+import LikeButton from '@/components/Buttons/LikeButton/LikeButton';
+
 
 
 
@@ -20,6 +23,7 @@ const HomePage: React.FC = () => {
     const [postContent, setPostContent] = useState<string>('');
     const [postImage, setPostImage] = useState<File | null>(null);
     const [preview, setPreview] = useState<string | null>(null);
+    const {Icon}=IconStore()
 
 
     const openModal = () => setIsModalOpen(true);
@@ -101,7 +105,7 @@ const HomePage: React.FC = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen text-white bg-[#0a0a0a] ">
           <div>
-          <button className="fixed top-4 right-4 bg-red-500 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-red-600 focus:outline-none"
+          <button className="fixed top-4 right-4 bg-black-500 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-red-600 focus:outline-none"
           onClick={logout}>
   Logout
 </button>
@@ -164,13 +168,20 @@ const HomePage: React.FC = () => {
                                     className="w-10 h-10 rounded-full"
                                 />
                                 <div className="ml-2">
-                                    <p className="font-semibold">{post.postById.username}</p>
+                                    <p className="font-semibold">{post.postById?.username}</p>
                                     <span className="text-gray-400 text-sm">{post.createdOn}</span>
                                 </div>
                             </div>
                             <p className="mb-2">{post.text}</p>
                             {post.image && <img src={post.image} alt="post" className="rounded mb-2" />}
+                            <div className='flex gap-4 pt-1'>  
+                            <div className='flex gap-1'><LikeButton postId={post._id} initialLike={post.likes.length} likedUsers={post.likes} /> </div>
+                            <div className='flex gap-1'>{Icon.Comment}{post.replies.length}</div>
+                            <div className='flex gap-1'>{Icon.Repost}{post.reposts.length}</div>
+                            <div className='flex gap-1'>{Icon.Share}</div>
+                            </div>
                         </div>
+                       
                     ))}
                 </div>
             </div>

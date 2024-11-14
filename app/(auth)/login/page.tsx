@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useState } from 'react';
+import React, {useState,useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import BG from '../../../public/img/bg (2).webp'
@@ -16,11 +16,11 @@ const Login: React.FC = () => {
   const router = useRouter();
   const { user, status, error } = useAppSelector((state) => state.login);
 
-  // useEffect(() => {
-  //   if (status === 'succeeded' && user) {
-  //     console.log(userId);
-  //   }
-  // },[ user]);
+  useEffect(() => {
+    if (status === 'succeeded' && user) {
+      console.log("userId");
+    }
+  },[ user]);
   
   
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
@@ -47,7 +47,7 @@ const Login: React.FC = () => {
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col items-center justify-center min-h-screen">
           <div className="bg-transparent p-6 rounded-lg shadow-lg w-full sm:w-8/12 md:w-6/12 lg:w-4/12 xl:w-3/12 mt-5">
-            <h2 className="text-lg font-semibold text-center mb-4 text-white">Log in with your Instagram account</h2>
+           
 
             <input
               type="text"

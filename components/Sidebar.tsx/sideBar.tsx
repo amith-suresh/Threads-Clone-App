@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 const SideBar = () => {
   return (
-    <div className='h-screen w-20 flex flex-col items-center pt-2'>
+    <div className='h-screen w-20 flex flex-col items-center pt-20'>
       <Image
         src={THREAD}
         alt='Thread'

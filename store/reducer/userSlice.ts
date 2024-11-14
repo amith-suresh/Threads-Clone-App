@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axiosInstance from "@/API/axiosinstance";
 
@@ -9,6 +9,11 @@ export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
 
 export const fetchUserData = createAsyncThunk('user/fetchUserData',async (userId:string) => {
     const response = await axiosInstance.get(`users/${userId}`);
+    return response.data;
+})
+
+export const upDateUser = createAsyncThunk('user/updateUser',async (userId:string)=>{
+    const response = await axiosInstance.patch(`users/${userId}`);
     return response.data;
 })
 
